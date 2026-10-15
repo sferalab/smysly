@@ -208,5 +208,5 @@ g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.035,t+.6);g.gain.line
 function unlock(){var c;try{c=G()}catch(e){return}if(c.state!=='running'||!ok){ok=1;try{var a=new Audio(S);a.setAttribute('playsinline','');a.volume=.01;var p=a.play();p&&p.catch&&p.catch(function(){})}catch(e){}try{var bb=c.createBuffer(1,1,22050),bs=c.createBufferSource();bs.buffer=bb;bs.connect(c.destination);bs.start(0)}catch(e){}}
 var r=c.state!=='running'?c.resume():null;function go(){if(c.state==='running'){shimmer();if(sh)E.forEach(function(e){document.removeEventListener(e,unlock,true)})}}go();r&&r.then&&r.then(go,function(){})}
 var E=['touchend','click','keydown'];E.forEach(function(e){document.addEventListener(e,unlock,true)});
-function tryLoad(){try{if(navigator.userActivation&&navigator.userActivation.hasBeenActive)unlock()}catch(e){}}
+function tryLoad(){var c;try{c=G()}catch(e){return}var r=c.state!=='running'?c.resume():null;function go(){if(c.state==='running'){shimmer();if(sh)E.forEach(function(e){document.removeEventListener(e,unlock,true)})}}go();r&&r.then&&r.then(go,function(){});setTimeout(function(){if(c.state!=='running'&&AC===c&&!ok){try{c.close()}catch(e){}AC=null}},300)}
 document.readyState==='complete'?tryLoad():window.addEventListener('load',tryLoad);})();
