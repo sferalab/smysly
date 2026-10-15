@@ -331,4 +331,3 @@ body.vip .cover .h2{background:linear-gradient(transparent 58%,rgba(180,166,232,
 body.vip .cover .h3{background:linear-gradient(transparent 58%,rgba(150,205,165,.6) 58%)!important}
 body.vip .cover .h4{background:linear-gradient(transparent 58%,rgba(150,195,232,.6) 58%)!important}
 body.vip .cover .orn{opacity:.15}
-html,body{background-color:var(--b2)}body::before{content:"";position:fixed;left:0;right:0;top:-200px;height:200px;background:var(--b2);z-index:19}
