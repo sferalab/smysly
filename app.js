@@ -205,8 +205,8 @@ var d=1.8,n=Math.floor(c.sampleRate*d),b=c.createBuffer(1,n,c.sampleRate),x=b.ge
 var s=c.createBufferSource(),f=c.createBiquadFilter(),g=c.createGain();s.buffer=b;f.type='bandpass';f.Q.value=.7;f.frequency.setValueAtTime(500,t);f.frequency.exponentialRampToValueAtTime(3600,t+d*.7);f.frequency.exponentialRampToValueAtTime(1800,t+d);
 g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.035,t+.6);g.gain.linearRampToValueAtTime(0,t+d);s.connect(f).connect(g).connect(out);s.start(t);
 [1046.5,1318.5,1567.98,1760,2093].forEach(function(fr,k){var o=c.createOscillator(),q=c.createGain(),tt=t+.25+k*.17;o.type='sine';o.frequency.value=fr;q.gain.setValueAtTime(0,tt);q.gain.linearRampToValueAtTime(.018,tt+.04);q.gain.exponentialRampToValueAtTime(.0001,tt+1.3);o.connect(q).connect(out);o.start(tt);o.stop(tt+1.4)})}
-function unlock(){var c;try{c=G()}catch(e){return}if(!ok){ok=1;try{var a=new Audio(S);a.setAttribute('playsinline','');a.volume=.01;var p=a.play();p&&p.catch&&p.catch(function(){})}catch(e){}try{var bb=c.createBuffer(1,1,22050),bs=c.createBufferSource();bs.buffer=bb;bs.connect(c.destination);bs.start(0)}catch(e){}}
+function unlock(){var c;try{c=G()}catch(e){return}if(c.state!=='running'||!ok){ok=1;try{var a=new Audio(S);a.setAttribute('playsinline','');a.volume=.01;var p=a.play();p&&p.catch&&p.catch(function(){})}catch(e){}try{var bb=c.createBuffer(1,1,22050),bs=c.createBufferSource();bs.buffer=bb;bs.connect(c.destination);bs.start(0)}catch(e){}}
 var r=c.state!=='running'?c.resume():null;function go(){if(c.state==='running'){shimmer();if(sh)E.forEach(function(e){document.removeEventListener(e,unlock,true)})}}go();r&&r.then&&r.then(go,function(){})}
-var E=['touchstart','touchend','pointerdown','mousedown','click','keydown'];E.forEach(function(e){document.addEventListener(e,unlock,true)});
-function tryLoad(){try{var c=G();var r=c.resume();setTimeout(function(){if(c.state==='running')shimmer()},300)}catch(e){}}
+var E=['touchend','click','keydown'];E.forEach(function(e){document.addEventListener(e,unlock,true)});
+function tryLoad(){try{if(navigator.userActivation&&navigator.userActivation.hasBeenActive)unlock()}catch(e){}}
 document.readyState==='complete'?tryLoad():window.addEventListener('load',tryLoad);})();
