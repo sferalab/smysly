@@ -140,8 +140,14 @@ intr:[(v,M)=>({h:'Из практики',t:`${M('0','Одна фраза в пр
 (v,M)=>({t:`Вы удивитесь, какая ${M('0','фраза принесла мне')} ${M('a')} заявок`,s:M('b','Точно не про '+v.b)})]};
 for(const k in X)SCH[k].x=X[k]})();
 const PLUS={};
-const schC=k=>{const V=variants(k),j=Math.min(st.vn[k]||0,V.length-1);return `<div class="form">${formula(k)}</div><div class="cover an" id="bprev">${coverH(out(k,V[j],j))}</div><div class="nums">${V.map((_,i)=>`<button class="num ${i===j?'on':''}" data-bn="${i}">${i+1}</button>`).join('')}</div><button class="btn goldb cpbtn" data-cpb="1" data-snd="cta">Скопировать заголовок</button>`};
-const formula=k=>SCH[k].p.map(([key,l],i)=>`<span class="hl h${i}">${esc(l)}</span>`).join(' <b class="pl">+</b> ');
+const schC=k=>{const V=variants(k),j=Math.min(st.vn[k]||0,V.length-1);return `<div class="form" id="bform">${formula(k,j)}</div><div class="cover an" id="bprev">${coverH(out(k,V[j],j))}</div><div class="nums">${V.map((_,i)=>`<button class="num ${i===j?'on':''}" data-bn="${i}">${i+1}</button>`).join('')}</div><button class="btn goldb cpbtn" data-cpb="1" data-snd="cta">Скопировать заголовок</button>`};
+const formula=(k,j)=>{const X=SCH[k].x,P=SCH[k].p,T={};P.forEach(([key])=>T[key]='\u0003'+key+'\u0004');const v=new Proxy({},{get:(o,key)=>T[key]||''});
+const M=(key,t)=>{const i=P.findIndex(x=>x[0]===key);let c=t==null?T[key]:String(t);const lit=c.replace(/\u0003[^\u0004]*\u0004/g,'').replace(/[*]/g,'').trim();
+c=/[0-9A-Za-zА-Яа-я]/.test(lit)?c.replace(/\u0003[^\u0004]*\u0004/g,'…').replace(/[*]/g,''):P[i][1]+lit;return '\u0001'+i+c+'\u0002'};
+const x=(j!=null&&X?X[j%X.length]:SCH[k].g)(v,M),parts=[];
+[x.h,x.t,x.s].filter(Boolean).forEach(line=>String(line).split(/(\u0001\d[^\u0002]*\u0002)/).forEach(seg=>{const m=seg.match(/^\u0001(\d)([^\u0002]*)\u0002$/);
+if(m)parts.push(`<span class="hl h${m[1]}">${esc(m[2])}</span>`);else{const t=seg.trim();if(t)parts.push(esc(t))}}));
+return parts.join(' <b class="pl">+</b> ')};
 function chips(k){const s=sp(),b=s.b,P=s.pairs,u=x=>[...new Set(x)];const sacs=u([b.sac,'лишнего стресса','сложных схем','долгих поисков']),real=u([b.realx,'системе','первом маленьком шаге']),
 pains=u([b.pain,b.pain2]),likes=u([b.like,'делаете все по инструкции','стараетесь изо всех сил']),fails=u([b.fail,'результата все нет','все остается как было']),notx=u([b.notx,'силе воли','удаче','мотивации']);
 return{why:{a:u([b.ca,b.ca2,'мои клиенты','даже опытные люди']),b:pains,c:u([b.even,'очень стараются','делают все по правилам'])},
@@ -250,7 +256,7 @@ if(d.go)return go(d.go);
 if(d.type){st.type=d.type;return go('cats')}
 if(d.tt){st.type=d.tt;st.sk=null;render('n');return}
 if(d.sk){st.sk=d.sk;$$('.schb').forEach(b=>b.classList.toggle('on',b===t));$('#schc').innerHTML=schC(st.sk);return}
-if(d.bn!=null){const k=st.sk;st.vn[k]=+d.bn;$$('.num').forEach(b=>b.classList.toggle('on',b===t));const p=$('#bprev');p.innerHTML=coverH(out(k,variants(k)[st.vn[k]],st.vn[k]));p.classList.remove('an');void p.offsetWidth;p.classList.add('an');return}
+if(d.bn!=null){const k=st.sk;st.vn[k]=+d.bn;$$('.num').forEach(b=>b.classList.toggle('on',b===t));const p=$('#bprev');p.innerHTML=coverH(out(k,variants(k)[st.vn[k]],st.vn[k]));const fm=$('#bform');if(fm)fm.innerHTML=formula(k,st.vn[k]);p.classList.remove('an');void p.offsetWidth;p.classList.add('an');return}
 if(d.cat!=null){st.cc=+d.cat;return go('sph')}
 if(d.sp){t.classList.add('on');const[a,b]=d.sp.split('.').map(Number);if(st.ci!==a||st.si!==b)st.pk=null;st.ci=a;st.si=b;setTimeout(()=>go('cards'),220);return}
 if(d.mk!=null){st.pk=+d.mk;return go('heads')}
