@@ -331,3 +331,4 @@ body.vip .cover .h2{background:linear-gradient(transparent 58%,rgba(180,166,232,
 body.vip .cover .h3{background:linear-gradient(transparent 58%,rgba(150,205,165,.6) 58%)!important}
 body.vip .cover .h4{background:linear-gradient(transparent 58%,rgba(150,195,232,.6) 58%)!important}
 body.vip .cover .orn{opacity:.15}
+@keyframes sndp{0%,100%{box-shadow:0 0 0 0 rgba(241,211,139,.0)}50%{box-shadow:0 0 0 6px rgba(241,211,139,.35)}}#sndb{animation:sndp 2.2s ease-in-out 4}

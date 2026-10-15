@@ -5,7 +5,7 @@ const D=window.DATA,$=s=>document.querySelector(s),$$=s=>[...document.querySelec
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const low=s=>s?s.charAt(0).toLowerCase()+s.slice(1):s,cap=s=>s?s.charAt(0).toUpperCase()+s.slice(1):s,cut=s=>String(s).replace(/[.!?]+$/,'');
 const acc=s=>esc(s).replace(/\*([^*]+)\*/g,'<span class="ac">$1</span>'),plain=s=>String(s).replace(/\*/g,'');
-let st={ci:null,si:null,pk:null,type:'e',vals:{},vn:{},sk:null},hist=[],cur='hero',sound=localStorage.getItem('snd')!=='0';
+let st={ci:null,si:null,pk:null,type:'e',vals:{},vn:{},sk:null},hist=[],cur='hero',sound=localStorage.getItem('snd2')!=='0';
 /* ---------- sound: kalimba / felt piano, warm pad ---------- */
 let AC,BUS,greeted=false;
 function ctx(){if(!AC){AC=new(window.AudioContext||window.webkitAudioContext)();BUS=AC.createBiquadFilter();BUS.type='lowpass';BUS.frequency.value=1300;BUS.Q.value=.3;
@@ -162,7 +162,7 @@ document.addEventListener('click',e=>{const t=e.target.closest('button,a,[data-p
 if(t.dataset.th){setTh(t.dataset.th);tone('th_'+t.dataset.th);return}
 if(t.id==='menuBtn'){tone($('#menu').hidden?'menu':'menuc');$('#menu').hidden=!$('#menu').hidden;return}
 if(!e.target.closest('#menu'))$('#menu').hidden=true;
-if(t.id==='snd'||t.id==='sndb'){sound=!sound;localStorage.setItem('snd',sound?'1':'0');sndUI();tone('nav');return}
+if(t.id==='snd'||t.id==='sndb'){sound=!sound;localStorage.setItem('snd2',sound?'1':'0');sndUI();tone('nav');return}
 if(t.id==='ovx'){tone('ovc');closeOv();return}
 if(t.id==='back'){tone('back');if(hist.length){cur=hist.pop();render('b')}return}
 if(d.cp!=null){e.stopPropagation();const p=sp().pairs[d.cp];copy('Вы продаете: '+p[0]+'\nКлиент покупает: '+p[1]);return}
