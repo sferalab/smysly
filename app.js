@@ -1,6 +1,6 @@
 const DONATE_URL='';
 const ORDER_URL=''; const MAIL='text-pro@list.ru'; // ссылка на заявку
-const SFERA_URL='https://sferatalanta.netlify.app'; // ссылка на страницу поддержки
+const SFERA_URL='https://sferalab.github.io/talanta/'; // ссылка на страницу поддержки
 const D=window.DATA,$=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],app=$('#app');
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const low=s=>s?s.charAt(0).toLowerCase()+s.slice(1):s,cap=s=>s?s.charAt(0).toUpperCase()+s.slice(1):s,cut=s=>String(s).replace(/[.!?]+$/,'');
