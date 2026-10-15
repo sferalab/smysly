@@ -67,7 +67,7 @@ details p,details li{padding-bottom:12px;font-size:18px}details ul{padding-left:
 .chips button{border:1px solid var(--g);background:#fff;border-radius:10px;padding:11px 12px;font:700 13px Montserrat;letter-spacing:.06em;text-transform:uppercase;color:var(--hd);cursor:pointer}
 .chips button.on{background:var(--b1);color:#fff}
 .tplv{font-size:17px;color:var(--mut);margin-top:10px;font-style:italic}
-#bar{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;align-items:center;gap:8px;padding:8px 10px;background:rgba(var(--b2r),.95);border-bottom:1px solid rgba(201,164,106,.5)}
+#bar{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--b2);padding-top:calc(8px + env(safe-area-inset-top));border-bottom:1px solid rgba(201,164,106,.5)}
 #back{border:1px solid var(--g);background:none;color:#F1D38B;font:700 13px Montserrat;letter-spacing:.1em;text-transform:uppercase;padding:0 12px;height:44px;border-radius:10px;cursor:pointer;white-space:nowrap}
 #back[disabled]{opacity:.3}
 #steps{flex:1;display:flex;gap:4px;justify-content:center}
@@ -331,3 +331,4 @@ body.vip .cover .h2{background:linear-gradient(transparent 58%,rgba(180,166,232,
 body.vip .cover .h3{background:linear-gradient(transparent 58%,rgba(150,205,165,.6) 58%)!important}
 body.vip .cover .h4{background:linear-gradient(transparent 58%,rgba(150,195,232,.6) 58%)!important}
 body.vip .cover .orn{opacity:.15}
+html,body{background-color:var(--b2)}body::before{content:"";position:fixed;left:0;right:0;top:-200px;height:200px;background:var(--b2);z-index:19}
